@@ -12,16 +12,17 @@ $.ajaxPrefilter(function (options) {
             Authorization: localStorage.getItem('token') || ''
         }
     }
+
     // 全局同意挂载complete回调函数
-    options.complete=function(res){
+    options.complete = function (res) {
         // console.log('执行力complete回调');
-            // console.log(res);
-            // 在complete回调函数中，可以使用res.responseJSON拿到服务器响应回来的数据
-            if (res.responseJSON.status === 1 && res.responseJSON.message === '身份认证失败！') {
-                // 1.强制清空token
-                localStorage.removeItem('token')
-                // 2.强制跳转到登陆页面
-                location.href = './login.html'
-            }
+        // console.log(res);
+        // 在complete回调函数中，可以使用res.responseJSON拿到服务器响应回来的数据
+        if (res.responseJSON.status === 1 && res.responseJSON.message === '身份认证失败！') {
+            // 1.强制清空token
+            localStorage.removeItem('token')
+            // 2.强制跳转到登陆页面
+            location.href = './login.html'
+        }
     }
 })
